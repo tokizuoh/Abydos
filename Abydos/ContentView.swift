@@ -25,10 +25,20 @@ struct ContentView: View {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
 
+    let titles = [
+        "aaaaaa",
+        "BBBBB",
+        "yyyy",
+        "DDD",
+        "oo",
+        "s"
+    ]
+
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-        let button = statusItem.button!
-        button.title = "{ここに今読み進めている本の最新}"
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
+            self?.statusItem.button?.title = self?.titles.randomElement() ?? ""
+        }
     }
 }
