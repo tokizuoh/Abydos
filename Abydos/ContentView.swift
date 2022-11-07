@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    @NSApplicationDelegateAdaptor(AppDelegate.self)
+    var delegate
+
     var body: some View {
         VStack {
             Image(systemName: "globe")
@@ -19,8 +22,13 @@ struct ContentView: View {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
+final class AppDelegate: NSObject, NSApplicationDelegate {
+    private var statusItem: NSStatusItem!
+
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
+
+        let button = statusItem.button!
+        button.title = "{ここに今読み進めている本の最新}"
     }
 }
