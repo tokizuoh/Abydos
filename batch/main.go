@@ -122,6 +122,6 @@ func main() {
 
 	err = createTextFile(bookTitle)
 	if err != nil {
-		log.Println(err)
+		log.Panicln(err)
 	}
 }
