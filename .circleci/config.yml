@@ -28,5 +28,12 @@ jobs:
 
 workflows:
   update-text-file:
+    triggers:
+      - schedule:
+        # Every day, At 00:00
+        cron: "0 0 * * *"
+        filters:
+          branches:
+            only: develop
     jobs:
       - update-text-file
