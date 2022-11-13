@@ -41,16 +41,14 @@ var targetTag string = "#book"
 var excludedTag string = "#読了"
 var excludedTitle string = "Terminal: Book"
 
-func main() {
-	_ = godotenv.Load()
-
+func getBookTitle() (string, error) {
 	projectName := os.Getenv("SCRAPBOX_FULL_PROJECT_NAME")
 	limit := 50
 	url := fmt.Sprintf("https://scrapbox.io/api/pages/%s/?limit=%d", projectName, limit)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		log.Panicln(err)
+		return "", err
 	}
 
 	csid := os.Getenv("CONNECT_SID")
@@ -63,18 +61,18 @@ func main() {
 
 	resp, err := client.Do(req)
 	if err != nil {
-		log.Panicln(resp)
+		return "", err
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Panicln(resp)
+		return "", err
 	}
 
 	var pr PagesResponse
 	if err = json.Unmarshal(body, &pr); err != nil {
-		log.Println(resp)
+		return "", err
 	}
 
 	var bookTitle string
@@ -93,7 +91,18 @@ func main() {
 	if bookTitle == "" {
 		// TODO: 終了コードを指定して且つdeferを実行させて終了させたい
 		// ref: https://budougumi0617.github.io/2021/06/30/which_termination_method_should_choose_on_go/
-		log.Panicln("最近本読んでないね？")
+		return "", fmt.Errorf("最近本読んでないね？")
+	}
+
+	return bookTitle, nil
+}
+
+func main() {
+	_ = godotenv.Load()
+
+	bookTitle, err := getBookTitle()
+	if err != nil {
+		log.Panicln(err)
 	}
 
 	log.Println(bookTitle)
