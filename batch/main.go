@@ -97,6 +97,21 @@ func getBookTitle() (string, error) {
 	return bookTitle, nil
 }
 
+func createTextFile(text string) error {
+	f, err := os.Create("title.txt")
+	if err != nil {
+		return err
+	}
+	defer f.Close()
+
+	_, err = f.WriteString(text)
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
 func main() {
 	_ = godotenv.Load()
 
@@ -105,6 +120,8 @@ func main() {
 		log.Panicln(err)
 	}
 
-	// TODO: この文字列を同リポジトリのどこかのファイルに保存する
-	log.Println(bookTitle)
+	err = createTextFile(bookTitle)
+	if err != nil {
+		log.Println(err)
+	}
 }
