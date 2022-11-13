@@ -105,5 +105,6 @@ func main() {
 		log.Panicln(err)
 	}
 
+	// TODO: この文字列を同リポジトリのどこかのファイルに保存する
 	log.Println(bookTitle)
 }
