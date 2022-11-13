@@ -34,6 +34,7 @@ workflows:
         cron: "0 0 * * *"
         filters:
           branches:
-            only: develop
+            only:
+              - develop
     jobs:
       - update-text-file
