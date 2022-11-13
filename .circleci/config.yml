@@ -1,0 +1,29 @@
+version: 2.1
+
+jobs:
+  update-text-file:
+    docker:
+      - image: cimg/go:1.18.4
+    steps:
+      - checkout
+      - run: "mv batch"
+      - run:
+          command: go run main.go
+      - run:
+          name: "commit title.txt to target repository"
+          command: |
+            git clone https://${GITHUB_PERSONAL_ACCESS_TOKEN}@github.com/tokizuoh/${TEXT_FILE_REPOSITORY}
+            mv title.txt ${TEXT_FILE_REPOSITORY}/title.txt
+            cd contrail
+            git config user.email ${GITHUB_EMAIL}
+            git config user.name "tokizuoh+circleci"
+          
+            git checkout -b test-circleci
+            git add ${TEXT_FILE_REPOSITORY}/title.txt
+            git commit -m '[CircleCI] update title.txt' || true
+            git push origin HEAD:develop
+
+workflows:
+  update-text-file:
+    jobs:
+      - update-text-file
