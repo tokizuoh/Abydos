@@ -21,7 +21,7 @@ func main() {
 	if err != nil {
 		log.Panicln(err)
 	}
-	log.Println(url)
+
 	csid := os.Getenv("CONNECT_SID")
 	cookie := http.Cookie{
 		Name:  "connect.sid",
