@@ -6,12 +6,15 @@ jobs:
       - image: cimg/go:1.18.4
     steps:
       - checkout
-      - run: "cd batch"
       - run:
-          command: go run main.go
+          name: "create title.txt"
+          command: |
+            cd batch
+            go run main.go
       - run:
           name: "commit title.txt to target repository"
           command: |
+            cd batch
             git clone https://${GITHUB_PERSONAL_ACCESS_TOKEN}@github.com/tokizuoh/${TEXT_FILE_REPOSITORY}
             mv title.txt ${TEXT_FILE_REPOSITORY}/title.txt
             cd contrail
