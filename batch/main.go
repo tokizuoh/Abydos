@@ -11,11 +11,40 @@ import (
 	"github.com/joho/godotenv"
 )
 
+type PagesResponse struct {
+	ProjectName string `json:"projectName"`
+	Skip        int    `json:"skip"`
+	Limit       int    `json:"limit"`
+	Count       int    `json:"count"`
+	Pages       []struct {
+		ID           string   `json:"id"`
+		Title        string   `json:"title"`
+		Image        string   `json:"image"`
+		Descriptions []string `json:"descriptions"`
+		User         struct {
+			ID string `json:"id"`
+		} `json:"user"`
+		Pin             int64  `json:"pin"`
+		Views           int    `json:"views"`
+		Linked          int    `json:"linked"`
+		CommitID        string `json:"commitId"`
+		Created         int    `json:"created"`
+		Updated         int    `json:"updated"`
+		Accessed        int    `json:"accessed"`
+		SnapshotCreated int    `json:"snapshotCreated"`
+		PageRank        int    `json:"pageRank"`
+	} `json:"pages"`
+}
+
+var targetTag string = "#book"
+var exludedTitle string = "Terminal: Book"
+
 func main() {
 	_ = godotenv.Load()
 
 	projectName := os.Getenv("SCRAPBOX_FULL_PROJECT_NAME")
-	url := fmt.Sprintf("https://scrapbox.io/api/pages/%s/", projectName)
+	limit := 25
+	url := fmt.Sprintf("https://scrapbox.io/api/pages/%s/?limit=%d", projectName, limit)
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
@@ -41,11 +70,24 @@ func main() {
 		log.Panicln(resp)
 	}
 
-	var jsonBody map[string]interface{}
-	if err = json.Unmarshal(body, &jsonBody); err != nil {
-		log.Panicln(err)
+	var pr PagesResponse
+	if err = json.Unmarshal(body, &pr); err != nil {
+		log.Println(resp)
 	}
 
-	log.Println(jsonBody)
+	var bookTitle string
+	updated := 0
+	for _, page := range pr.Pages {
+		for _, description := range page.Descriptions {
+			if description == targetTag && page.Title != exludedTitle {
+				log.Println(page.Updated, page.Title)
+				if page.Updated > updated {
+					bookTitle = page.Title
+					updated = page.Updated
+				}
+			}
+		}
+	}
 
+	log.Println(bookTitle)
 }
