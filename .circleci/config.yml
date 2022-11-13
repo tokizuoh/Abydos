@@ -17,7 +17,7 @@ jobs:
             cd batch
             git clone https://${GITHUB_PERSONAL_ACCESS_TOKEN}@github.com/tokizuoh/${TEXT_FILE_REPOSITORY}
             mv title.txt ${TEXT_FILE_REPOSITORY}/title.txt
-            cd contrail
+            cd ${TEXT_FILE_REPOSITORY}
             git config user.email ${GITHUB_EMAIL}
             git config user.name "tokizuoh+circleci"
           
