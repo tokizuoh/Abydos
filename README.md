@@ -1,6 +1,6 @@
 # Abydos
 
-macOS application that displays the title of the book you are currently reading in the macOS menu bar.
+macOS application that displays the title of the book you are currently reading in the menu bar.
 
 ## What is "currently reading"?
 
