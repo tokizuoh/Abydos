@@ -112,5 +112,5 @@ iOSInjectionProject/
 # Go workspace file
 go.work
 
-### Custom
+### Custom ###
 .env
