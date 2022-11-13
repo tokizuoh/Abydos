@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 )
@@ -37,13 +38,14 @@ type PagesResponse struct {
 }
 
 var targetTag string = "#book"
-var exludedTitle string = "Terminal: Book"
+var excludedTag string = "#読了"
+var excludedTitle string = "Terminal: Book"
 
 func main() {
 	_ = godotenv.Load()
 
 	projectName := os.Getenv("SCRAPBOX_FULL_PROJECT_NAME")
-	limit := 25
+	limit := 50
 	url := fmt.Sprintf("https://scrapbox.io/api/pages/%s/?limit=%d", projectName, limit)
 
 	req, err := http.NewRequest("GET", url, nil)
@@ -79,14 +81,19 @@ func main() {
 	updated := 0
 	for _, page := range pr.Pages {
 		for _, description := range page.Descriptions {
-			if description == targetTag && page.Title != exludedTitle {
-				log.Println(page.Updated, page.Title)
+			if page.Title != excludedTitle && strings.Contains(description, targetTag) && !strings.Contains(description, excludedTag) {
 				if page.Updated > updated {
 					bookTitle = page.Title
 					updated = page.Updated
 				}
 			}
 		}
+	}
+
+	if bookTitle == "" {
+		// TODO: 終了コードを指定して且つdeferを実行させて終了させたい
+		// ref: https://budougumi0617.github.io/2021/06/30/which_termination_method_should_choose_on_go/
+		log.Panicln("最近本読んでないね？")
 	}
 
 	log.Println(bookTitle)
