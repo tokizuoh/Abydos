@@ -38,7 +38,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            self?.statusItem.button?.title = self?.titles.randomElement() ?? ""
+            self?.statusItem.button?.title = "📗" + (self?.titles.randomElement() ?? "")
         }
     }
 }
