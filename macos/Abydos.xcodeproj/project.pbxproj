@@ -20,6 +20,7 @@
 		73E0EDEA291940BF009C457D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73E0EDED291940BF009C457D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		73E0EDEF291940BF009C457D /* Abydos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Abydos.entitlements; sourceTree = "<group>"; };
+		73FA84CB292279DC00181AD7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		73E0EDE5291940BD009C457D /* Abydos */ = {
 			isa = PBXGroup;
 			children = (
+				73FA84CB292279DC00181AD7 /* Info.plist */,
 				73E0EDE6291940BD009C457D /* AbydosApp.swift */,
 				73E0EDE8291940BD009C457D /* ContentView.swift */,
 				73E0EDEA291940BF009C457D /* Assets.xcassets */,
@@ -272,6 +274,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Abydos/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Abydos/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -297,6 +301,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Abydos/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Abydos/Info.plist;
+				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
