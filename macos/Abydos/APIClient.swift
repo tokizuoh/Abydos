@@ -8,8 +8,22 @@
 import Foundation
 
 final class APIClient {
+    let url: URL?
+    let cookieKey: String
+    let cookieValue: String
+
+    init(
+        url: URL?,
+        cookieKey: String,
+        cookieValue: String
+    ) {
+        self.url = url
+        self.cookieKey = cookieKey
+        self.cookieValue = cookieValue
+    }
+
     func fetch() {
-        guard let url = Dummy.url else {
+        guard let url = url else {
             return
         }
         let urlRequest = URLRequest(url: url)
@@ -18,7 +32,7 @@ final class APIClient {
         urlSessionConfiguration.httpCookieAcceptPolicy = .onlyFromMainDocumentDomain
         urlSessionConfiguration.httpShouldSetCookies = true
         let cookie = HTTPCookie.cookies(
-            withResponseHeaderFields: ["Set-Cookie": "\(Dummy.key)=\(Dummy.value)"],
+            withResponseHeaderFields: ["Set-Cookie": "\(cookieKey)=\(cookieValue)"],
             for: url
         )
         urlSessionConfiguration.httpCookieStorage?.setCookie(cookie[0])
