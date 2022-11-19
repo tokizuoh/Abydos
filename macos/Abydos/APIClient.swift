@@ -36,7 +36,7 @@ final class APIClient {
             for: url
         )
         urlSessionConfiguration.httpCookieStorage?.setCookie(cookie[0])
-        _ = URLSession(configuration: urlSessionConfiguration).dataTask(with: urlRequest) { data, response, error in
+        URLSession(configuration: urlSessionConfiguration).dataTask(with: urlRequest) { data, response, error in
             if let error {
                 print(error)
                 return
