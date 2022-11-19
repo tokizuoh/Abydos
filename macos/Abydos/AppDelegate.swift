@@ -17,7 +17,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     )
 
     func applicationDidFinishLaunching(_ notification: Notification) {
-        closeWindowIfExisted()
+        closeWindowIfOpened()
 
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
@@ -44,7 +44,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     }
 
-    private func closeWindowIfExisted() {
+    private func closeWindowIfOpened() {
         if let window = NSApplication.shared.windows.first {
             window.close()
         }
