@@ -25,20 +25,31 @@ struct ContentView: View {
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
 
-    let titles = [
-        "aaaaaa",
-        "BBBBB",
-        "yyyy",
-        "DDD",
-        "oo",
-        "s"
-    ]
+    let client = APIClient(
+        url: Dummy.url,
+        cookieKey: Dummy.key,
+        cookieValue: Dummy.value
+    )
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
-            self?.statusItem.button?.title = "📗" + (self?.titles.randomElement() ?? "")
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            Task {
+                do {
+                    guard let self else {
+                        return
+                    }
+                    let response = try await self.client.fetch()
+                    if let title = Translator.translate(response) {
+                        self.statusItem.button?.title = "📗" + title
+                    }
+                } catch {
+                    print(error)
+                }
+            }
+
         }
+
     }
 }
