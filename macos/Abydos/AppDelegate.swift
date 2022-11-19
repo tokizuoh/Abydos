@@ -57,8 +57,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
         let menu = NSMenu()
         menu.addItem(
-            withTitle: NSLocalizedString("Preference", comment: "Show preferences window"),
-            action: #selector(terminate),
+            withTitle: NSLocalizedString("Open Scrapbox", comment: "Open Scrapbox page"),
+            action: #selector(openScrapboxPage),
             keyEquivalent: ""
         )
         menu.addItem(.separator())
@@ -72,5 +72,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     @objc func terminate() {
         NSApp.terminate(self)
+    }
+
+    @objc func openScrapboxPage() {
+        // TODO
     }
 }
