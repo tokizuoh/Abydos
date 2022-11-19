@@ -23,7 +23,7 @@ struct Page: Codable {
     let updated: Int?
     let accessed: Int?
     let snapshotCreated: Int?
-    let pageRank: Int?
+    let pageRank: Double?
 }
 
 struct PagesResponse: Codable {
