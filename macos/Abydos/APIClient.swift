@@ -31,6 +31,7 @@ final class APIClient {
         guard let url = url else {
             throw AbydosError.invalidServerResponse
         }
+
         let urlRequest = URLRequest(url: url)
 
         let urlSessionConfiguration = URLSessionConfiguration.default

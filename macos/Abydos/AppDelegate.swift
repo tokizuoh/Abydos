@@ -19,6 +19,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             guard let statusItemModel else {
                 return
             }
+
             statusItem.button?.title = "📘 \(statusItemModel.title)"
         }
     }
@@ -44,6 +45,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     guard let self else {
                         return
                     }
+
                     let response = try await self.client.fetch()
                     self.statusItemModel = Translator.translate(response)
                 } catch {
@@ -67,6 +69,7 @@ private extension AppDelegate {
               event.type == .leftMouseUp || event.type == .rightMouseUp else {
             return
         }
+
         var menu: NSMenu {
             let menu = NSMenu()
             menu.addItem(
@@ -94,6 +97,7 @@ private extension AppDelegate {
               let url = URL(string: statusItemModel.urlString) else {
             return
         }
+
         NSWorkspace.shared.open(url)
     }
 }
