@@ -67,18 +67,21 @@ private extension AppDelegate {
               event.type == .leftMouseUp || event.type == .rightMouseUp else {
             return
         }
-        let menu = NSMenu()
-        menu.addItem(
-            withTitle: NSLocalizedString("Open Scrapbox", comment: "Open Scrapbox page"),
-            action: #selector(openScrapboxPage),
-            keyEquivalent: ""
-        )
-        menu.addItem(.separator())
-        menu.addItem(
-            withTitle: NSLocalizedString("Quit", comment: "Quit app"),
-            action: #selector(terminate),
-            keyEquivalent: ""
-        )
+        var menu: NSMenu {
+            let menu = NSMenu()
+            menu.addItem(
+                withTitle: NSLocalizedString("Open Scrapbox", comment: "Open Scrapbox page"),
+                action: #selector(openScrapboxPage),
+                keyEquivalent: ""
+            )
+            menu.addItem(.separator())
+            menu.addItem(
+                withTitle: NSLocalizedString("Quit", comment: "Quit app"),
+                action: #selector(terminate),
+                keyEquivalent: ""
+            )
+            return menu
+        }
         statusItem?.menu = menu
     }
 
