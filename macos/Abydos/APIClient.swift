@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum AbydosError: Error {
+    case invalidURL
+    case invalidServerResponse
+}
+
 final class APIClient {
     let url: URL?
     let cookieKey: String
@@ -22,9 +27,9 @@ final class APIClient {
         self.cookieValue = cookieValue
     }
 
-    func fetch() {
+    func fetch() async throws -> PagesResponse {
         guard let url = url else {
-            return
+            throw AbydosError.invalidServerResponse
         }
         let urlRequest = URLRequest(url: url)
 
@@ -36,27 +41,16 @@ final class APIClient {
             for: url
         )
         urlSessionConfiguration.httpCookieStorage?.setCookie(cookie[0])
-        URLSession(configuration: urlSessionConfiguration).dataTask(with: urlRequest) { data, response, error in
-            if let error {
-                print(error)
-                return
-            }
 
-            guard let data,
-                  let response = response as? HTTPURLResponse,
-                  response.statusCode == 200 else {
-                return
-            }
+        let (data, response) = try await URLSession(configuration: urlSessionConfiguration).data(for: urlRequest)
 
-            do {
-                let pagesResponse = try JSONDecoder().decode(PagesResponse.self, from: data)
-                print(pagesResponse)
-            } catch {
-                print(error)
-                return
-            }
+        guard let httpResponse = response as? HTTPURLResponse,
+              httpResponse.statusCode == 200 else {
+            throw AbydosError.invalidServerResponse
+        }
 
-        }.resume()
+        let pagesResponse = try JSONDecoder().decode(PagesResponse.self, from: data)
 
+        return pagesResponse
     }
 }
