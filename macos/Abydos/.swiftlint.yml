@@ -1,2 +1,6 @@
 included:
   - Abydos
+
+line_length:
+  warning: 300
+  error: 500
