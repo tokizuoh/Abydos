@@ -14,6 +14,14 @@ struct StatusItemModel {
 
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
+
+    private var timeInterval: TimeInterval {
+        #if DEBUG
+        return 5
+        #else
+        return 3600
+        #endif
+    }
     private lazy var statusItemModel: StatusItemModel? = nil {
         didSet {
             guard let statusItemModel else {
@@ -43,7 +51,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             await fetchAndDispatch()
         }
 
-        scheduleTimer()
+        scheduleTimer(timeInterval)
     }
 }
 
@@ -103,8 +111,8 @@ private extension AppDelegate {
         }
     }
 
-    private func scheduleTimer() {
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+    private func scheduleTimer(_ timeInterval: TimeInterval) {
+        Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true) { _ in
             Task { [weak self] in
                 await self?.fetchAndDispatch()
             }
