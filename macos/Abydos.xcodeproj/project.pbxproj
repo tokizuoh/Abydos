@@ -13,7 +13,7 @@
 		73C6A12D2928B57500BCC980 /* Translator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C6A12C2928B57500BCC980 /* Translator.swift */; };
 		73C6A1472928D10F00BCC980 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73C6A1462928D10F00BCC980 /* AppDelegate.swift */; };
 		73E0EDE7291940BD009C457D /* AbydosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0EDE6291940BD009C457D /* AbydosApp.swift */; };
-		73E0EDE9291940BD009C457D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0EDE8291940BD009C457D /* ContentView.swift */; };
+		73E0EDE9291940BD009C457D /* AbydosView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73E0EDE8291940BD009C457D /* AbydosView.swift */; };
 		73E0EDEB291940BF009C457D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E0EDEA291940BF009C457D /* Assets.xcassets */; };
 		73E0EDEE291940BF009C457D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 73E0EDED291940BF009C457D /* Preview Assets.xcassets */; };
 /* End PBXBuildFile section */
@@ -26,7 +26,7 @@
 		73C6A1462928D10F00BCC980 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		73E0EDE3291940BD009C457D /* Abydos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Abydos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		73E0EDE6291940BD009C457D /* AbydosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbydosApp.swift; sourceTree = "<group>"; };
-		73E0EDE8291940BD009C457D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		73E0EDE8291940BD009C457D /* AbydosView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbydosView.swift; sourceTree = "<group>"; };
 		73E0EDEA291940BF009C457D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		73E0EDED291940BF009C457D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		73E0EDEF291940BF009C457D /* Abydos.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Abydos.entitlements; sourceTree = "<group>"; };
@@ -65,7 +65,7 @@
 			children = (
 				73FA84CB292279DC00181AD7 /* Info.plist */,
 				73E0EDE6291940BD009C457D /* AbydosApp.swift */,
-				73E0EDE8291940BD009C457D /* ContentView.swift */,
+				73E0EDE8291940BD009C457D /* AbydosView.swift */,
 				73E0EDEA291940BF009C457D /* Assets.xcassets */,
 				73E0EDEF291940BF009C457D /* Abydos.entitlements */,
 				73E0EDEC291940BF009C457D /* Preview Content */,
@@ -178,7 +178,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				73E0EDE9291940BD009C457D /* ContentView.swift in Sources */,
+				73E0EDE9291940BD009C457D /* AbydosView.swift in Sources */,
 				73C6A12D2928B57500BCC980 /* Translator.swift in Sources */,
 				7365E50129251F1800E7A765 /* PagesResponse.swift in Sources */,
 				7365E5052925270100E7A765 /* Private.swift in Sources */,
