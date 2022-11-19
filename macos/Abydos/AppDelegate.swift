@@ -75,6 +75,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func openScrapboxPage() {
-        // TODO
+        // TODO: Scrapbox URL
+        NSWorkspace.shared.open(URL(string: "https://google.com")!)
     }
 }
