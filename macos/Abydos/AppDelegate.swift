@@ -52,7 +52,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+}
 
+// MARK: - Feature
+private extension AppDelegate {
     private func closeWindowIfOpened() {
         if let window = NSApplication.shared.windows.first {
             window.close()
