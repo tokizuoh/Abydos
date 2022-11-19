@@ -79,11 +79,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         statusItem?.menu = menu
     }
 
-    @objc func terminate() {
+    @objc private func terminate() {
         NSApp.terminate(self)
     }
 
-    @objc func openScrapboxPage() {
+    @objc private func openScrapboxPage() {
         guard let statusItemModel,
               let url = URL(string: statusItemModel.urlString) else {
             return
