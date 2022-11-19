@@ -40,7 +40,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
 
         Task {
-            fetchAndDispatch
+            await fetchAndDispatch()
         }
 
         scheduleTimer()
