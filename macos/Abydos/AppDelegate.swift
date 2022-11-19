@@ -7,8 +7,21 @@
 
 import AppKit
 
+struct StatusItemModel {
+    let title: String
+    let urlString: String
+}
+
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
+    private lazy var statusItemModel: StatusItemModel? = nil {
+        didSet {
+            guard let statusItemModel else {
+                return
+            }
+            statusItem.button?.title = "📘 \(statusItemModel.title)"
+        }
+    }
 
     let client = APIClient(
         url: Dummy.url,
@@ -32,9 +45,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                         return
                     }
                     let response = try await self.client.fetch()
-                    if let title = Translator.translate(response) {
-                        self.statusItem.button?.title = "📗" + title
-                    }
+                    self.statusItemModel = Translator.translate(response)
                 } catch {
                     print(error)
                 }
@@ -73,7 +84,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     @objc func openScrapboxPage() {
-        // TODO: Scrapbox URL
-        NSWorkspace.shared.open(URL(string: "https://google.com")!)
+        guard let statusItemModel,
+              let url = URL(string: statusItemModel.urlString) else {
+            return
+        }
+        NSWorkspace.shared.open(url)
     }
 }

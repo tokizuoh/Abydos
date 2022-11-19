@@ -12,7 +12,7 @@ struct Translator {
     static let excludedTag = "#読了"
     static let excludedTitle = "Terminal: Book"
 
-    static func translate(_ pagesResponse: PagesResponse) -> String? {
+    static func translate(_ pagesResponse: PagesResponse) -> StatusItemModel? {
         var updated = Int.min
         var bookTitle: String?
 
@@ -34,6 +34,15 @@ struct Translator {
                 }
             }
         }
-        return bookTitle
+
+        guard let bookTitle,
+              let encodedBookTitle = bookTitle.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else {
+            return nil
+        }
+
+        return StatusItemModel(
+            title: bookTitle,
+            urlString: "https://scrapbox.io/\(pagesResponse.projectName)/\(encodedBookTitle)"
+        )
     }
 }

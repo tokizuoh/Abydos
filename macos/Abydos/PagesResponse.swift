@@ -11,7 +11,7 @@ struct User: Codable {
 
 struct Page: Codable {
     let id: String?
-    let title: String?
+    let title: String
     let image: String?
     let descriptions: [String]
     let user: User
@@ -27,7 +27,7 @@ struct Page: Codable {
 }
 
 struct PagesResponse: Codable {
-    let projectName: String?
+    let projectName: String
     let skip: Int?
     let limit: Int?
     let count: Int?
