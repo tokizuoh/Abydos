@@ -39,9 +39,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
                     print(error)
                 }
             }
-
         }
-
     }
 
     private func closeWindowIfOpened() {
