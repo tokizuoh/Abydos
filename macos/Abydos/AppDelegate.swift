@@ -17,6 +17,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     )
 
     func applicationDidFinishLaunching(_ notification: Notification) {
+        closeWindowIfExisted()
+
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
         if let button = statusItem.button {
@@ -40,6 +42,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         }
 
+    }
+
+    private func closeWindowIfExisted() {
+        if let window = NSApplication.shared.windows.first {
+            window.close()
+        }
     }
 
     @objc private func showPopOver(_ sender: NSStatusBarButton) {
