@@ -34,6 +34,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ notification: Notification) {
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
 
+        if let button = statusItem.button {
+            button.action = #selector(showPopOver)
+        }
+
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
             Task {
                 do {
@@ -51,5 +55,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
         }
 
+    }
+
+    @objc private func showPopOver(_ sender: NSStatusBarButton) {
+        guard let event = NSApp.currentEvent,
+              (event.type == .leftMouseUp || event.type == .rightMouseUp )else {
+            return
+        }
+        let menu = NSMenu()
+        menu.addItem(
+            withTitle: NSLocalizedString("Preference", comment: "Show preferences window"),
+            action: #selector(terminate),
+            keyEquivalent: ""
+        )
+        menu.addItem(.separator())
+        menu.addItem(
+            withTitle: NSLocalizedString("Quit", comment: "Quit app"),
+            action: #selector(terminate),
+            keyEquivalent: ""
+        )
+        statusItem?.menu = menu
+    }
+
+    @objc func terminate() {
+        NSApp.terminate(self)
     }
 }
