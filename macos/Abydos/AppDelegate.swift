@@ -39,20 +39,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
             button.action = #selector(showPopOver)
         }
 
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
-            Task {
-                do {
-                    guard let self else {
-                        return
-                    }
-
-                    let response = try await self.client.fetch()
-                    self.statusItemModel = Translator.translate(response)
-                } catch {
-                    print(error)
-                }
-            }
+        Task {
+            fetchAndDispatch
         }
+
+        scheduleTimer()
     }
 }
 
@@ -99,5 +90,24 @@ private extension AppDelegate {
         }
 
         NSWorkspace.shared.open(url)
+    }
+
+    private func fetchAndDispatch() async {
+        do {
+            let response = try await client.fetch()
+            DispatchQueue.main.async { [weak self] in
+                self?.statusItemModel = Translator.translate(response)
+            }
+        } catch {
+            print(error)
+        }
+    }
+
+    private func scheduleTimer() {
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
+            Task { [weak self] in
+                await self?.fetchAndDispatch()
+            }
+        }
     }
 }
