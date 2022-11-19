@@ -64,7 +64,7 @@ private extension AppDelegate {
 
     @objc private func showPopOver(_ sender: NSStatusBarButton) {
         guard let event = NSApp.currentEvent,
-              (event.type == .leftMouseUp || event.type == .rightMouseUp )else {
+              event.type == .leftMouseUp || event.type == .rightMouseUp else {
             return
         }
         let menu = NSMenu()
