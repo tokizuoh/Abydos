@@ -87,6 +87,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 73E0EDF2291940BF009C457D /* Build configuration list for PBXNativeTarget "Abydos" */;
 			buildPhases = (
+				73C6A12B29287AC200BCC980 /* Run Script - SwiftLint */,
 				73E0EDDF291940BD009C457D /* Sources */,
 				73E0EDE0291940BD009C457D /* Frameworks */,
 				73E0EDE1291940BD009C457D /* Resources */,
@@ -144,6 +145,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		73C6A12B29287AC200BCC980 /* Run Script - SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script - SwiftLint";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n    swiftlint --fix --format\n    swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		73E0EDDF291940BD009C457D /* Sources */ = {
