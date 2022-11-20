@@ -34,16 +34,27 @@ final class APIClient {
 
         let urlRequest = URLRequest(url: url)
 
-        let urlSessionConfiguration = URLSessionConfiguration.default
-        urlSessionConfiguration.httpCookieAcceptPolicy = .onlyFromMainDocumentDomain
-        urlSessionConfiguration.httpShouldSetCookies = true
-        let cookie = HTTPCookie.cookies(
-            withResponseHeaderFields: ["Set-Cookie": "\(cookieKey)=\(cookieValue)"],
-            for: url
-        )
-        urlSessionConfiguration.httpCookieStorage?.setCookie(cookie[0])
+        let configuration: URLSessionConfiguration = {
+            let configuration = URLSessionConfiguration.default
+            configuration.httpCookieAcceptPolicy = .onlyFromMainDocumentDomain
+            configuration.httpShouldSetCookies = true
 
-        let (data, response) = try await URLSession(configuration: urlSessionConfiguration).data(for: urlRequest)
+            let cookie = HTTPCookie(
+                properties: [
+                    HTTPCookiePropertyKey.domain: "https://scrapbox.io/",
+                    HTTPCookiePropertyKey.originURL: url,
+                    HTTPCookiePropertyKey.path: "/",
+                    HTTPCookiePropertyKey.name: cookieKey,
+                    HTTPCookiePropertyKey.value: cookieValue,
+                    HTTPCookiePropertyKey.secure: "TRUE"
+                ]
+            )
+
+            configuration.httpCookieStorage?.setCookie(cookie!)
+            return configuration
+        }()
+
+        let (data, response) = try await URLSession(configuration: configuration).data(for: urlRequest)
 
         guard let httpResponse = response as? HTTPURLResponse,
               httpResponse.statusCode == 200 else {
