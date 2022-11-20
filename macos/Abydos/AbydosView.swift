@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AbydosView: View {
     @NSApplicationDelegateAdaptor(AppDelegate.self)
-    var delegate
+    private var delegate
 
     var body: some View {
         EmptyView()
