@@ -69,7 +69,7 @@ private extension AppDelegate {
             return
         }
 
-        var menu: NSMenu {
+        let menu: NSMenu = {
             let menu = NSMenu()
             menu.addItem(
                 withTitle: NSLocalizedString("Open Scrapbox", comment: "Open Scrapbox page"),
@@ -83,7 +83,7 @@ private extension AppDelegate {
                 keyEquivalent: ""
             )
             return menu
-        }
+        }()
         statusItem?.menu = menu
     }
 
