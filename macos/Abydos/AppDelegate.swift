@@ -76,6 +76,11 @@ private extension AppDelegate {
                 action: #selector(openScrapboxPage),
                 keyEquivalent: ""
             )
+            menu.addItem(
+                withTitle: NSLocalizedString("Preference", comment: "Open Preference"),
+                action: #selector(openPreference),
+                keyEquivalent: ""
+            )
             menu.addItem(.separator())
             menu.addItem(
                 withTitle: NSLocalizedString("Quit", comment: "Quit app"),
@@ -98,6 +103,10 @@ private extension AppDelegate {
         }
 
         NSWorkspace.shared.open(url)
+    }
+
+    @objc private func openPreference() {
+        // TODO
     }
 
     private func fetchAndDispatch() async {
