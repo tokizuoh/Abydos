@@ -15,6 +15,10 @@ final class SettingsViewModel: ObservableObject {
 
     init(inputDataCacher: InputDataCacher) {
         self.inputDataCacher = inputDataCacher
+        Task {
+            includedTag = await inputDataCacher.getIncludedTag() ?? ""
+            excludedTag = await inputDataCacher.getExcludedTag() ?? ""
+        }
     }
 
     func cancel() {
@@ -22,7 +26,6 @@ final class SettingsViewModel: ObservableObject {
     }
 
     func connect() {
-        // TODO: call using api client
         Task {
             await inputDataCacher.setIncludedTag(includedTag)
             await inputDataCacher.setExcludedTag(excludedTag)

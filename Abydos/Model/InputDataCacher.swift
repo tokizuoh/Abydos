@@ -5,15 +5,15 @@
 //  Created by tokizo on 2022/11/26.
 //
 
-import Foundation
+import SwiftUI
 
 actor InputDataCacher {
     static var shared = InputDataCacher()
 
     private init() {}
 
-    private var includedTag: String?
-    private var excludedTag: String?
+    @AppStorage("includedTag") private var includedTag: String?
+    @AppStorage("excludedTag") private var excludedTag: String?
 
     func getIncludedTag() -> String? {
         return includedTag
