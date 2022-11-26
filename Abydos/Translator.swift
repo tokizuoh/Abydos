@@ -8,12 +8,11 @@
 import Foundation
 
 struct Translator {
-    static let targetTag = "#book"
     static let excludedTag = "#読了"
     static let excludedTitle = "Terminal: Book"
 
     struct Option {
-        let tagetTag: String?
+        let targetTag: String?
     }
 
     static func translate(_ pagesResponse: PagesResponse, _ option: Option) -> StatusItemModel? {
@@ -25,16 +24,14 @@ struct Translator {
                 continue
             }
 
-            for description in page.descriptions {
-                if description.contains(targetTag) && !description.contains(excludedTag) {
-                    guard let pageUpdated = page.updated else {
-                        continue
-                    }
+            for description in page.descriptions where validate(description, option: option) {
+                guard let pageUpdated = page.updated else {
+                    continue
+                }
 
-                    if updated < pageUpdated {
-                        updated = pageUpdated
-                        bookTitle = page.title
-                    }
+                if updated < pageUpdated {
+                    updated = pageUpdated
+                    bookTitle = page.title
                 }
             }
         }
@@ -48,5 +45,13 @@ struct Translator {
             title: bookTitle,
             urlString: "https://scrapbox.io/\(pagesResponse.projectName)/\(encodedBookTitle)"
         )
+    }
+
+    static func validate(_ text: String, option: Option) -> Bool {
+        if let targetTag = option.targetTag {
+            return text.contains(targetTag) && !text.contains(excludedTag)
+        }
+
+        return !text.contains(excludedTag)
     }
 }
