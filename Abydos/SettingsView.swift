@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var targetTag: String = ""
+    @State var targetTag = ""
+    @State var connectButtonDisabled = true
 
     var body: some View {
         VStack(alignment: .leading) {
             Form {
                 TextField("Target Tag", text: $targetTag)
+            }
+            .onChange(of: targetTag) { newValue in
+                connectButtonDisabled = newValue.isEmpty
             }
             HStack {
                 Spacer()
@@ -23,7 +27,7 @@ struct SettingsView: View {
                 Button(action: {}) {
                     Text("Connect")
                 }
-                .disabled(true)
+                .disabled(connectButtonDisabled)
             }
         }
         .padding(20)
