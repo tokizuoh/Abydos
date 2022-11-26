@@ -6,7 +6,6 @@
 //
 
 import AppKit
-import SwiftUI
 
 final class SettingsViewModel: ObservableObject {
     @Published var targetTag = ""
@@ -21,7 +20,7 @@ final class SettingsViewModel: ObservableObject {
     }
 
     private func closeWindow() {
-        NSApplication.shared.windows.map { window in
+        _ = NSApplication.shared.windows.map { window in
             if "\(type(of: window))" == "AppKitWindow" {
                 window.close()
             }
