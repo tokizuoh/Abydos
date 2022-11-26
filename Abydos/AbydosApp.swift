@@ -9,9 +9,15 @@ import SwiftUI
 
 @main
 struct AbydosApp: App {
+    @NSApplicationDelegateAdaptor(AppDelegate.self)
+    private var delegate
+
     var body: some Scene {
         WindowGroup {
             AbydosView()
+        }
+        Settings {
+            SettingsView()
         }
     }
 }

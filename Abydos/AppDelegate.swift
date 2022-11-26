@@ -106,7 +106,8 @@ private extension AppDelegate {
     }
 
     @objc private func openPreference() {
-        // TODO
+        NSApp.sendAction(Selector(("showSettingsWindow:")), to: nil, from: nil)
+        NSApp.activate(ignoringOtherApps: true)
     }
 
     private func fetchAndDispatch() async {
