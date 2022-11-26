@@ -8,25 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @State var text: String = ""
-    @State var hoge: Bool = false
+    @State var targetTag: String = ""
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Form {
-                TextField("Hoge", text: $text)
-                Toggle("hoge", isOn: $hoge)
+                TextField("Target Tag", text: $targetTag)
             }
         }
         .padding(20)
     }
 }
 
-//#if DEBUG
-//struct SettingsView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        SettingsView()
-//    }
-//}
-//
-//#endif
+#if DEBUG
+struct SettingsView_Preview: PreviewProvider {
+    static var previews: some View {
+        SettingsView()
+    }
+}
+#endif
