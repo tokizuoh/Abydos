@@ -35,6 +35,7 @@ struct SettingsView: View {
             }
         }
         .padding(20)
+        .navigationTitle("Abydos")
     }
 }
 
