@@ -17,7 +17,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
 
     private var timeInterval: TimeInterval {
         #if DEBUG
-        return 5
+        return 3600
         #else
         return 3600
         #endif

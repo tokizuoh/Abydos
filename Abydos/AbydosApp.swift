@@ -14,7 +14,7 @@ struct AbydosApp: App {
 
     var body: some Scene {
         WindowGroup {
-            AbydosView()
+            EmptyView()
         }
         Settings {
             SettingsView()
