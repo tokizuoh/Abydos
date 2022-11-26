@@ -4,3 +4,6 @@ included:
 line_length:
   warning: 300
   error: 500
+
+disabled_rules:
+  type_name
