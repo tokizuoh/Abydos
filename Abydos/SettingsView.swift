@@ -8,8 +8,11 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @ObservedObject var viewModel = SettingsViewModel()
-    @State var connectButtonDisabled = true
+    @ObservedObject
+    private var viewModel = SettingsViewModel()
+
+    @State
+    private var connectButtonDisabled = true
 
     var body: some View {
         VStack(alignment: .leading) {
