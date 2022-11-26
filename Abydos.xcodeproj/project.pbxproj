@@ -46,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7362A18C2932097300E8CAAC /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7362A18A2931FE0C00E8CAAC /* SettingsViewModel.swift */,
+				73E0EDE8291940BD009C457D /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		73E0EDDA291940BD009C457D = {
 			isa = PBXGroup;
 			children = (
@@ -65,9 +74,9 @@
 		73E0EDE5291940BD009C457D /* Abydos */ = {
 			isa = PBXGroup;
 			children = (
+				7362A18C2932097300E8CAAC /* Settings */,
 				73FA84CB292279DC00181AD7 /* Info.plist */,
 				73E0EDE6291940BD009C457D /* AbydosApp.swift */,
-				73E0EDE8291940BD009C457D /* SettingsView.swift */,
 				73E0EDEA291940BF009C457D /* Assets.xcassets */,
 				73E0EDEF291940BF009C457D /* Abydos.entitlements */,
 				73E0EDEC291940BF009C457D /* Preview Content */,
@@ -76,7 +85,6 @@
 				7365E5042925270100E7A765 /* Private.swift */,
 				73C6A12C2928B57500BCC980 /* Translator.swift */,
 				73C6A1462928D10F00BCC980 /* AppDelegate.swift */,
-				7362A18A2931FE0C00E8CAAC /* SettingsViewModel.swift */,
 			);
 			path = Abydos;
 			sourceTree = "<group>";
