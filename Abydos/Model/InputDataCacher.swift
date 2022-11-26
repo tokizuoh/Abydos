@@ -12,13 +12,13 @@ actor InputDataCacher {
 
     private init() {}
 
-    private var targetTag: String?
+    private var includedTag: String?
 
-    func getTargetTag() -> String? {
-        return targetTag
+    func getIncludedTag() -> String? {
+        return includedTag
     }
 
-    func setTargetTag(_ newValue: String) {
-        targetTag = newValue
+    func setIncludedTag(_ newValue: String) {
+        includedTag = newValue
     }
 }

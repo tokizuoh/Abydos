@@ -8,7 +8,8 @@
 import AppKit
 
 final class SettingsViewModel: ObservableObject {
-    @Published var targetTag = ""
+    @Published var includedTag = ""
+    @Published var excludedTag = ""
 
     let inputDataCacher: InputDataCacher
 
@@ -23,7 +24,7 @@ final class SettingsViewModel: ObservableObject {
     func connect() {
         // TODO: call using api client
         Task {
-            await inputDataCacher.setTargetTag(targetTag)
+            await inputDataCacher.setIncludedTag(includedTag)
         }
         closeWindow()
     }

@@ -17,9 +17,10 @@ struct SettingsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Form {
-                TextField("Target Tag:", text: $viewModel.targetTag)
+                TextField("Included Tag:", text: $viewModel.includedTag)
+                TextField("Excluded Tag:", text: $viewModel.excludedTag)
             }
-            .onChange(of: viewModel.targetTag) { newValue in
+            .onChange(of: viewModel.includedTag) { newValue in
                 connectButtonDisabled = newValue.isEmpty
             }
             HStack {

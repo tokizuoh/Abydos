@@ -115,9 +115,9 @@ private extension AppDelegate {
         do {
             let response = try await client.fetch()
 
-            var option: Translator.Option = .init(targetTag: nil)
-            if let targetTag = await InputDataCacher.shared.getTargetTag() {
-                option = .init(targetTag: targetTag)
+            var option: Translator.Option = .init(includedTag: nil)
+            if let includedTag = await InputDataCacher.shared.getIncludedTag() {
+                option = .init(includedTag: includedTag)
             }
 
             DispatchQueue.main.async { [weak self] in

@@ -12,7 +12,7 @@ struct Translator {
     static let excludedTitle = "Terminal: Book"
 
     struct Option {
-        let targetTag: String?
+        let includedTag: String?
     }
 
     static func translate(_ pagesResponse: PagesResponse, _ option: Option) -> StatusItemModel? {
@@ -48,8 +48,8 @@ struct Translator {
     }
 
     static func validate(_ text: String, option: Option) -> Bool {
-        if let targetTag = option.targetTag {
-            return text.contains(targetTag) && !text.contains(excludedTag)
+        if let includedTag = option.includedTag {
+            return text.contains(includedTag) && !text.contains(excludedTag)
         }
 
         return !text.contains(excludedTag)
