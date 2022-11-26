@@ -15,6 +15,16 @@ struct SettingsView: View {
             Form {
                 TextField("Target Tag", text: $targetTag)
             }
+            HStack {
+                Spacer()
+                Button(action: {}) {
+                    Text("Cancel")
+                }
+                Button(action: {}) {
+                    Text("Connect")
+                }
+                .disabled(true)
+            }
         }
         .padding(20)
     }
