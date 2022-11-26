@@ -8,22 +8,16 @@
 import Foundation
 
 struct Translator {
-    static let excludedTag = "#読了"
-    static let excludedTitle = "Terminal: Book"
-
     struct Option {
         let includedTag: String?
+        let excludedTag: String?
     }
 
-    static func translate(_ pagesResponse: PagesResponse, _ option: Option) -> StatusItemModel? {
+    static func translate(_ pagesResponse: PagesResponse, option: Option) -> StatusItemModel? {
         var updated = Int.min
         var bookTitle: String?
 
         for page in pagesResponse.pages {
-            guard page.title != excludedTitle else {
-                continue
-            }
-
             for description in page.descriptions where validate(description, option: option) {
                 guard let pageUpdated = page.updated else {
                     continue
@@ -48,10 +42,21 @@ struct Translator {
     }
 
     static func validate(_ text: String, option: Option) -> Bool {
-        if let includedTag = option.includedTag {
-            return text.contains(includedTag) && !text.contains(excludedTag)
-        }
+        let hasContainsIncludedTag: Bool = {
+            if let includedTag = option.includedTag {
+                return text.contains(includedTag)
+            } else {
+                return true
+            }
+        }()
+        let hasNotContainsExcludedTag: Bool = {
+            if let excludedTag = option.excludedTag {
+                return !text.contains(excludedTag)
+            } else {
+                return true
+            }
+        }()
 
-        return !text.contains(excludedTag)
+        return hasContainsIncludedTag && hasNotContainsExcludedTag
     }
 }

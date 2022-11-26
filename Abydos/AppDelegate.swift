@@ -115,15 +115,24 @@ private extension AppDelegate {
         do {
             let response = try await client.fetch()
 
-            var option: Translator.Option = .init(includedTag: nil)
-            if let includedTag = await InputDataCacher.shared.getIncludedTag() {
-                option = .init(includedTag: includedTag)
+            var includedTag: String?
+            var excludedTag: String?
+            // swiftlint:disable identifier_name
+            if let _includedTag = await InputDataCacher.shared.getIncludedTag() {
+                includedTag = _includedTag
             }
+            if let _excludedTag = await InputDataCacher.shared.getExcludedTag() {
+                excludedTag = _excludedTag
+            }
+            // swiftlint:enable identifier_name
 
             DispatchQueue.main.async { [weak self] in
                 self?.statusItemModel = Translator.translate(
                     response,
-                    option
+                    option: Translator.Option(
+                        includedTag: includedTag,
+                        excludedTag: excludedTag
+                    )
                 )
             }
         } catch {

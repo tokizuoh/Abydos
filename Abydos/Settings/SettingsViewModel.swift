@@ -25,6 +25,7 @@ final class SettingsViewModel: ObservableObject {
         // TODO: call using api client
         Task {
             await inputDataCacher.setIncludedTag(includedTag)
+            await inputDataCacher.setExcludedTag(excludedTag)
         }
         closeWindow()
     }
