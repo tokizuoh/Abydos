@@ -14,7 +14,7 @@ struct SettingsView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Form {
-                TextField("Target Tag", text: $targetTag)
+                TextField("Target Tag:", text: $targetTag)
             }
             .onChange(of: targetTag) { newValue in
                 connectButtonDisabled = newValue.isEmpty
