@@ -12,12 +12,13 @@ struct StatusItemModel {
     let urlString: String
 }
 
+@MainActor
 final class AppDelegate: NSObject, NSApplicationDelegate {
     private var statusItem: NSStatusItem!
 
     private var timeInterval: TimeInterval {
         #if DEBUG
-        return 3600
+        return 5
         #else
         return 3600
         #endif
@@ -113,8 +114,17 @@ private extension AppDelegate {
     private func fetchAndDispatch() async {
         do {
             let response = try await client.fetch()
+
+            var option: Translator.Option = .init(tagetTag: nil)
+            if let targetTag = await InputDataCacher.shared.getTargetTag() {
+                option = .init(tagetTag: targetTag)
+            }
+
             DispatchQueue.main.async { [weak self] in
-                self?.statusItemModel = Translator.translate(response)
+                self?.statusItemModel = Translator.translate(
+                    response,
+                    option
+                )
             }
         } catch {
             print(error)

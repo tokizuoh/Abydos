@@ -12,7 +12,11 @@ struct Translator {
     static let excludedTag = "#読了"
     static let excludedTitle = "Terminal: Book"
 
-    static func translate(_ pagesResponse: PagesResponse) -> StatusItemModel? {
+    struct Option {
+        let tagetTag: String?
+    }
+
+    static func translate(_ pagesResponse: PagesResponse, _ option: Option) -> StatusItemModel? {
         var updated = Int.min
         var bookTitle: String?
 

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @ObservedObject
-    private var viewModel = SettingsViewModel()
+    private var viewModel = SettingsViewModel(inputDataCacher: InputDataCacher.shared)
 
     @State
     private var connectButtonDisabled = true

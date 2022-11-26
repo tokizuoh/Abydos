@@ -10,12 +10,21 @@ import AppKit
 final class SettingsViewModel: ObservableObject {
     @Published var targetTag = ""
 
+    let inputDataCacher: InputDataCacher
+
+    init(inputDataCacher: InputDataCacher) {
+        self.inputDataCacher = inputDataCacher
+    }
+
     func cancel() {
         closeWindow()
     }
 
     func connect() {
         // TODO: call using api client
+        Task {
+            await inputDataCacher.setTargetTag(targetTag)
+        }
         closeWindow()
     }
 
