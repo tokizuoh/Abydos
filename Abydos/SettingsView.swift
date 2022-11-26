@@ -24,10 +24,10 @@ struct SettingsView: View {
             }
             HStack {
                 Spacer()
-                Button(action: {}) {
+                Button(action: viewModel.cancel) {
                     Text("Cancel")
                 }
-                Button(action: {}) {
+                Button(action: viewModel.connect) {
                     Text("Connect")
                 }
                 .disabled(connectButtonDisabled)
